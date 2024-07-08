@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="card" style="width: 28rem;">
+        <div class="card-body">
+          <h5 class="card-title">Delete Blog Post</h5>
+          <p class="card-text">are you sure you want to delete <strong>{{blog.name}}</strong></p>
+            <button class="btn btn-danger" type=submit>Yes, Delete</button>
+            <a class="btn btn-primary m-2" href="{% url 'your_blogs' %}">No</a>
+        </div>
+      </div>
+</form>
+
+{% endblock %}

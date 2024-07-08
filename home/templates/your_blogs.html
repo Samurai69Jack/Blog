@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{%block content%}
+<style>
+    .blog-image {
+        max-width: 100%;
+        max-height: 300px;
+        width: auto;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .image-container {
+        text-align: center;
+    }
+</style>
+<div class="container">
+    <h2>Your Blogs</h2>
+    <div class="row justify-content-center">
+        {% if user_blogs %}
+        {% for user_blog in user_blogs %}
+            <div class="col-md-8">
+                <div class="card w-100">
+                    <div class="image-container">
+                        <img src="{{ user_blog.image.url }}" class="blog-image" alt="{{ user_blog.name }}">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">{{ user_blog.name }}</h4>
+                        <p class="card-text">{{ user_blog.description }}</p>
+                        <a href="{% url 'edit_blog' user_blog.id %}" class="btn btn-primary card-link">Edit</a>
+                        <a href="{% url 'delete_blog' user_blog.id %}" class="btn btn-danger card-link">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-md-8">
+            <div class="card w-100">
+                <div class="card-body">
+                    <h4 class="card-title text-center">You have not written any blogs yet!</h4>
+                    <br>
+                    <p class="card-text">Create a blog to get started.</p>
+                    <a href="{% url 'add_blog' %}" class="btn btn-primary card-link">Add a Blog </a>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+        
+    </div>
+</div>
+
+{% endblock %}
